@@ -1,0 +1,26 @@
+{
+  "name": "apollo-pythian",
+  "version": "1.0.0",
+  "description": "Spec compliant and shareable error repository for Apollo Client/Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theGlenn/apollo-pythian.git"
+  },
+  "keywords": [
+    "apollo",
+    "graphql",
+    "errors",
+    "apollo-client",
+    "apollo-server"
+  ],
+  "author": "Glenn Sonna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theGlenn/apollo-pythian/issues"
+  },
+  "homepage": "https://github.com/theGlenn/apollo-pythian#readme"
+}
