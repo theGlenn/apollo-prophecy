@@ -84,6 +84,10 @@ export const errorType = `
 *TODO*
 
 ## TODO
-* See #1: Client `apollo-errorgen ask` command
-* See #2: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
-* See #3: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing 
+* See [#1][i1]: Client `apollo-errorgen ask` command
+* See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
+* See [#3][i3]: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing
+
+[i1]: https://github.com/theGlenn/apollo-pythian/issues/1
+[i2]: https://github.com/theGlenn/apollo-pythian/issues/2
+[i3]: https://github.com/theGlenn/apollo-pythian/issues/3
