@@ -12,7 +12,7 @@ npm i -g apollo-errorgen
 
 ### Server
 #### `generate`
-This command creates the `Error.ts` file, using `--output` param you can change the name and location.
+This command creates the `Error.ts` file from a `Json` definition file, using `--output` param you can change the name and location.
 
 ```sh
 apollo-errorgen generate errors.json
