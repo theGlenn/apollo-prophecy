@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "lib": [
+      "esnext", "dom", "es6"
+    ]
+  },
+  "exclude": [
+    "./test",
+    "./dist",
+    "./_generated",
+    "./node_modules",
+    "./lib/**/*.spec.ts",
+    "./lib/**/*.check.ts"
+    ]
+}

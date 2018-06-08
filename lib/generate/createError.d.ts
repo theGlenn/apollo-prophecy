@@ -1,0 +1,2 @@
+export declare const PythianErrorTextDef = "class PythianError extends ApolloError {\n  constructor(name: string, message: string, code?: string, properties?: Record<string, any>) {\n    super(message, code, properties);\n\n    // Set the prototype explicitly.\n    // https://stackoverflow.com/a/41102306\n    Object.setPrototypeOf(this, SyntaxError.prototype);\n    Object.defineProperty(this, 'name', { value: name });\n  }\n}";
+export default function (name: string, message: string, code?: string, properties?: Record<string, any>): string;
