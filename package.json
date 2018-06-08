@@ -1,7 +1,7 @@
 {
   "name": "apollo-pythian",
   "version": "0.1.0",
-  "description": "Spec compliant and shareable error repository for Apollo Client/Server",
+  "description": "Generate Spec compliant and shareable errors for Apollo Client/Server from JSON or Graphql Schema",
   "main": "./lib/index.js",
   "bin": "./lib/cli.js",
   "scripts": {
