@@ -1,4 +1,8 @@
 # Apollo Errors Generator
+[![Build Status][travis-image]][travis-url]
+
+[travis-image]: https://travis-ci.com/theGlenn/apollo-pythian.svg?branch=master
+[travis-url]: https://travis-ci.com/theGlenn/apollo-pythian
 
 This is a simple utility to generate *throwable* Apollo errors for your server while also being able to expose through your API as documentation.
 
