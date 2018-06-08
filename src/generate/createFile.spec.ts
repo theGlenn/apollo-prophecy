@@ -41,12 +41,12 @@ describe('createError', () => {
     //expect(() => { throw new SpecialError()}).to.throw('SpecialError');
   });
 
-  it('Should correctly ', () => {
+  it('Should correctly create the GraphQL Type Definition string', () => {
     const type = createGraphqlType(errors);
-    expect(classNoWP(type)).to.be.eql(classNoWP(`
+    expect(classNoWP(type)).to.be.eq(classNoWP(`
     type PythianError {
       message: String
-      code: String
+      code: String?
     }
     `));
   });
