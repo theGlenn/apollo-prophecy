@@ -12,12 +12,7 @@ npm i -g apollo-errorgen
 
 ### Server
 #### `generate`
-
-The purpose of this command is to create a JSON introspection dump file for a given graphql schema. The input schema can be fetched from a remote graphql server or from a local file. The resulting JSON introspection dump file is needed as input to the [generate](#generate) command.
-
-To download a GraphQL schema by sending an introspection query to a server:
-
-This command creates the `Error.ts` file, using `--output` param you can change the name and location.
+This command creates the `Error.ts` file from a `Json` definition file, using `--output` param you can change the name and location.
 
 ```sh
 apollo-errorgen generate errors.json
