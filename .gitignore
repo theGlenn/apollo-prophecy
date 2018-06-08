@@ -5,3 +5,4 @@ node_modules
 .vscode
 *.log
 _generated/
+_generated/Errors.ts
