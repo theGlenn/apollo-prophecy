@@ -91,3 +91,15 @@ export const errorType = `
 [i1]: https://github.com/theGlenn/apollo-pythian/issues/1
 [i2]: https://github.com/theGlenn/apollo-pythian/issues/2
 [i3]: https://github.com/theGlenn/apollo-pythian/issues/3
+
+## Contribute
+Take an issue fork `/develop` -> work -> test -> pull request -> 💥
+
+## Run tests
+```sh
+npm test
+```
+
+```sh
+yarn test
+```
