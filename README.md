@@ -84,4 +84,6 @@ export const errorType = `
 *TODO*
 
 ## TODO
-* Client `apollo-errorgen ask` command see
+* See #1: Client `apollo-errorgen ask` command
+* See #2: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
+* See #3: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing 
