@@ -1,6 +1,6 @@
 {
   "name": "apollo-pythian",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Spec compliant and shareable error repository for Apollo Client/Server",
   "main": "./lib/index.js",
   "bin": "./lib/cli.js",
