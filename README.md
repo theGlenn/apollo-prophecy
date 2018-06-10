@@ -1,26 +1,37 @@
 # Apollo Errors Generator
-[![Build Status][travis-image]][travis-url]
 
-[travis-image]: https://travis-ci.com/theGlenn/apollo-pythian.svg?branch=master
-[travis-url]: https://travis-ci.com/theGlenn/apollo-pythian
+[![Build Status](https://travis-ci.com/theGlenn/apollo-pythian.svg?branch=master)](https://travis-ci.com/theGlenn/apollo-pythian)
 
-This is a simple utility to generate *throwable* Apollo errors for your server while also being able to expose through your API as documentation.
+📟 Command tool to generate **throwable** Apollo errors for your server while also being able to expose through your API as documentation.
 
-
-## Usage
-First thing you should install `apollo-errorgen` globaly
+## Install
+First, you should install `apollo-pythian` globaly
 
 ```sh
-npm i -g apollo-errorgen
+npm install -g apollo-pythian
+```
+
+## Usage
+
+```
+Usage: apollo-pythian [command]
+
+Commands:
+  apollo-pythian generate [--file] [--out]
+  apollo-pythian ask-errors <graphql endpoint> [--query]
+
+Options:
+  -h, --help     Show help                                             [boolean]
+  -v, --version  Display version number                                [boolean]
 ```
 
 ### Server
 #### `generate`
-This command creates the `Error.ts` file from a `Json` definition file, using `--output` param you can change the name and location.
+This command creates the `Error.ts` file from a `Json` definition file, using `--out` param you can change the name and location.
 
 ```sh
-apollo-errorgen generate errors.json
-````
+apollo-pythian generate errors.json
+```
 
 For example given the following `errors.json`:
 
