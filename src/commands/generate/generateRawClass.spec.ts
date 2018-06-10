@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
-import createFile, { mapFieldToGraphQLTypes, createGraphqlType } from './createFile'
 import { classNoWP } from './test.utils'
+import { mapFieldToGraphQLTypes, createGraphqlType } from './generateRawClass'
 
 const errors = {
   UnknownError: {
@@ -21,18 +21,13 @@ const errors = {
   },
 };
 
-const types = [{
-  message: "String",
-  code: "String"
-}, {
-  message: "String",
-}, {
-  message: "String",
-  code: "String"
-}, {
-  message: "String",
-  code: "String"
-}];
+const types = [
+  { message: "String", code: "String" },
+  { message: "String" },
+  { message: "String", code: "String" },
+  { message: "String", code: "String"}
+];
+
 describe('createError', () => {
   it('Should correctly map object fields to the right type', () => {
     const errorFieldsType = mapFieldToGraphQLTypes(errors);

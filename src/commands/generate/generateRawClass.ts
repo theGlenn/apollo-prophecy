@@ -1,5 +1,5 @@
 import createError, { PythianErrorTextDef } from './createError'
-import { ErrorEntries, ErrorEntry } from './../types'
+import { ErrorEntries, ErrorEntry } from './../../types'
 
 export type ScalarType = "Boolean" | "Int" | "Float" | "String"
 export type ScalarTypesMap = {[key: string]: ScalarType};
@@ -20,6 +20,7 @@ function scalaraTypeFromValue(value: any): ScalarType {
       return null;
   }
 }
+
 function createDefinitions(entries: ErrorEntries) {
   const errors = []
   for (let key in entries) {

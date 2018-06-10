@@ -1,8 +1,6 @@
 import * as jsonfile from 'jsonfile';
-
-import { ErrorEntries, ErrorEntry } from './../types'
-import { writeFileClass } from './../FileWriter'
-import createFile from './createFile'
+import createClassFile from './createClassFile'
+import generateRawClass from './generateRawClass';
 
 export interface ProphecyArgs {
   intputFilePath: string,
@@ -12,11 +10,11 @@ export interface ProphecyArgs {
 export default function generate (args: ProphecyArgs) {
   console.log('You shall fail miserably here is how...', args);
   const { intputFilePath, outputFilePath } =  args;
-  jsonfile.readFile(intputFilePath, (err, entries: ErrorEntries) => {
+  jsonfile.readFile(intputFilePath, (err, entries) => {
     if(!err) {
-      let outPutFileRaw = createFile(entries);
+      let outPutFileRaw = generateRawClass(entries);
     
-      writeFileClass(outPutFileRaw, outputFilePath)
+      createClassFile(outPutFileRaw, outputFilePath)
     }
   });
 }
