@@ -10,7 +10,8 @@
     "cli": "ts-node src/cli.ts",
     "preversion": "npm test",
     "version": "npm run build && git add -A lib",
-    "postversion": "git push && git push --tags && rm -rf lib"
+    "postversion": "git push && git push --tags && rm -rf lib",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
