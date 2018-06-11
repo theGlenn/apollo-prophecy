@@ -1,4 +1,4 @@
-import createError, { PythianErrorTextDef } from './createError'
+import createError, { PropheticErrorTextDef } from './createError'
 import { ErrorEntries, ErrorEntry } from './../../types'
 
 export type ScalarType = "Boolean" | "Int" | "Float" | "String"
@@ -69,7 +69,7 @@ export function createGraphqlType(entries: ErrorEntries) {
   });
   
   return `
-    type PythianError {
+    type PropheticError {
       ${fields.join('\n      ')}
     }
   `
@@ -84,7 +84,7 @@ export default function (entries: ErrorEntries) {
   export const definitions = ${JSON.stringify(entries, null, 2)};
   export const errorType = \`${type}\`;
   
-  ${PythianErrorTextDef}
+  ${PropheticErrorTextDef}
   
   ${allErros}
   `

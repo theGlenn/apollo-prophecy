@@ -1,5 +1,5 @@
 {
-  "name": "apollo-pythian",
+  "name": "apollo-prophecy",
   "version": "0.1.0",
   "description": "Generate Spec compliant and shareable errors for Apollo Client/Server from JSON or Graphql Schema",
   "main": "./lib/index.js",

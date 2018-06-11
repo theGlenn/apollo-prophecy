@@ -1,5 +1,5 @@
 import * as jsonfile from 'jsonfile';
-import createClassFile from './createClassFile'
+import writeClassFile from './writeClassFile'
 import generateRawClass from './generateRawClass';
 
 export interface ProphecyArgs {
@@ -14,7 +14,7 @@ export default function generate (args: ProphecyArgs) {
     if(!err) {
       let outPutFileRaw = generateRawClass(entries);
     
-      createClassFile(outPutFileRaw, outputFilePath)
+      writeClassFile(outPutFileRaw, outputFilePath)
     }
   });
 }

@@ -5,8 +5,8 @@ import { ParsedArgs } from 'minimist';
 
 import { generate, askErrors } from './commands';
 
-// apollo-oracle prophecy errors.json
-// apollo-oracle ask http://localhost:3000/graphql -q appErrors
+// apollo-prophecy generate errors.json
+// apollo-prophecy ask-erros http://localhost:3000/graphql -q Errs.ts
 interface Args extends ParsedArgs {
   generate?: string
   "ask-errors"?: string

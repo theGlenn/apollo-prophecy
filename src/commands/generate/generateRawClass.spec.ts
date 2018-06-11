@@ -39,7 +39,7 @@ describe('createError', () => {
   it('Should correctly create the GraphQL Type Definition string', () => {
     const type = createGraphqlType(errors);
     expect(classNoWP(type)).to.be.eq(classNoWP(`
-    type PythianError {
+    type PropheticError {
       message: String
       code: String?
     }

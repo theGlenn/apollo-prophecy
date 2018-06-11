@@ -7,7 +7,7 @@ import  {
 
 type ErrorEntry = { [key:string]: any }
 
-export const PythianErrorTextDef = `class PythianError extends ApolloError {
+export const PropheticErrorTextDef = `class PropheticError extends ApolloError {
   constructor(name: string, message: string, code?: string, properties?: Record<string, any>) {
     super(message, code, properties);
 
@@ -21,7 +21,7 @@ export const PythianErrorTextDef = `class PythianError extends ApolloError {
 
 export default function(name: string, message: string, code?: string, properties?: Record<string, any>) {
   return `
-  export class ${name} extends PythianError {
+  export class ${name} extends PropheticError {
     constructor(properties?: Record<string, any>) {
       super("${name}", "${message}", ${code ? `"${code}"` : undefined }, properties);
     }

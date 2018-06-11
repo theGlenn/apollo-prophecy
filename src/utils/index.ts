@@ -1,1 +1,1 @@
-export * from './fs-pythian';
+export * from './fs-prophecy';

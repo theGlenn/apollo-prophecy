@@ -13,7 +13,7 @@ const { expect } = chai;
 
 const mkdirTmp = () => {
   const tmpDir = os.tmpdir();
-  const dirLocation = path.join(os.tmpdir(), 'pythian-test-');
+  const dirLocation = path.join(os.tmpdir(), 'apollo-prophetic-test-');
   return fs.mkdtempSync(dirLocation);
 };
 
