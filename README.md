@@ -1,22 +1,37 @@
 # Apollo Errors Generator
 
-This is a simple utility to generate *throwable* Apollo errors for your server while also being able to expose through your API as documentation.
+[![Build Status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
+📟 Command tool to generate **throwable** Apollo errors for your server while also being able to expose through your API as documentation.
 
-## Usage
-First thing you should install `apollo-errorgen` globaly
+## Install
+First, you should install `apollo-prophecy` globaly
 
 ```sh
-npm i -g apollo-errorgen
+npm install -g apollo-prophecy
+```
+
+## Usage
+
+```
+Usage: apollo-prophecy [command]
+
+Commands:
+  apollo-prophecy generate [--file] [--out]
+  apollo-prophecy ask-errors <graphql endpoint> [--query]
+
+Options:
+  -h, --help     Show help                                             [boolean]
+  -v, --version  Display version number                                [boolean]
 ```
 
 ### Server
 #### `generate`
-This command creates the `Error.ts` file from a `Json` definition file, using `--output` param you can change the name and location.
+This command creates the `Error.ts` file from a `Json` definition file, using `--out` param you can change the name and location.
 
 ```sh
-apollo-errorgen generate errors.json
-````
+apollo-prophecy generate errors.json
+```
 
 For example given the following `errors.json`:
 
@@ -36,13 +51,13 @@ For example given the following `errors.json`:
 Apollo Errorgen will generate the following `Errors.ts`
 
 ```ts
-export class AuthenticationRequiredError extends PythianError {
+export class AuthenticationRequiredError extends ProphecyError {
   constructor(properties?: Record<string, any>) {
     super("AuthenticationRequiredError", "You must be logged in to do this","AUTH_REQUIRED", properties);
   }
 }
   
-export class UserNotFoundError extends PythianError {
+export class UserNotFoundError extends ProphecyError {
   constructor(properties?: Record<string, any>) {
     super("UserNotFoundError", "No user found", "USER_NOT_FOUND", properties);
   }
@@ -51,7 +66,7 @@ export class UserNotFoundError extends PythianError {
 
 Now you can use it the following way `throw new UserNotFoundError()`
 
-`apollo-errorgen` also exposes a `definitions` and a graphql type named `PythianError` so that you can expose all your errors descriptions through resolvers, [go see Client](###client).
+`apollo-errorgen` also exposes a `definitions` and a graphql type named `ProphecyError` so that you can expose all your errors descriptions through resolvers, [go see Client](###client).
 
 ```ts
 ...
@@ -67,7 +82,7 @@ export const definitions = {
 };
 
 export const errorType = `
-  type PythianError {
+  type ProphecyError {
     message: String
     code: String
   }
@@ -83,9 +98,9 @@ export const errorType = `
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
 * See [#3][i3]: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing
 
-[i1]: https://github.com/theGlenn/apollo-pythian/issues/1
-[i2]: https://github.com/theGlenn/apollo-pythian/issues/2
-[i3]: https://github.com/theGlenn/apollo-pythian/issues/3
+[i1]: https://github.com/theGlenn/apollo-prophecy/issues/1
+[i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
+[i3]: https://github.com/theGlenn/apollo-prophecy/issues/3
 
 ## Contribute
 Take an issue fork `/develop` -> work -> test -> pull request -> 💥
