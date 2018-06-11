@@ -2,4 +2,4 @@ export interface ProphecyArgs {
     intputFilePath: string;
     outputFilePath?: string;
 }
-export default function prophecy(args: ProphecyArgs): void;
+export default function generate(args: ProphecyArgs): void;

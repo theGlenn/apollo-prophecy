@@ -1,4 +1,4 @@
-import { ErrorEntries } from './../types';
+import { ErrorEntries } from './../../types';
 export declare type ScalarType = "Boolean" | "Int" | "Float" | "String";
 export declare type ScalarTypesMap = {
     [key: string]: ScalarType;
