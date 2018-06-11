@@ -1,13 +1,16 @@
 {
   "name": "apollo-prophecy",
-  "version": "0.1.1",
+  "version": "0.0.0",
   "description": "Generate Spec compliant and shareable errors for Apollo Client/Server from JSON or Graphql Schema",
   "main": "./lib/index.js",
   "bin": "./lib/cli.js",
   "scripts": {
     "test": "mocha --opts mocha.opts",
     "build": "rm -rf lib && tsc",
-    "cli": "ts-node src/cli.ts"
+    "cli": "ts-node src/cli.ts",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A lib",
+    "postversion": "git push && git push --tags && rm -rf lib"
   },
   "repository": {
     "type": "git",
