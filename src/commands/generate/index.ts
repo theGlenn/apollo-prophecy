@@ -13,7 +13,7 @@ export default function generate (args: ProphecyArgs) {
     if(!err) {
       const rawClassContent = generateRawClass(entries);
       const outputPath = writeClassFile(rawClassContent, outputFilePath);
-      console.log('🙏 You will fail... but successfully');
+      console.log('🔮 You will fail... but successfully');
       console.log(`└── ✨ Prophecy available at ${outputPath}`);
     }
   });
