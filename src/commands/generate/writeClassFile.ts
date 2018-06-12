@@ -18,5 +18,7 @@ export default (content: string, output: string = '_generated') => {
   mkdirs(outputDirectory);
 
   const outputFilePath = normalize(`${outputDirectory}/${outputFile}`);
-  return writeFile(outputFilePath, content);
+  writeFile(outputFilePath, content);
+
+  return outputFilePath;
 }

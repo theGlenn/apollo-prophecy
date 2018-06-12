@@ -1,11 +1,35 @@
-# Apollo Errors Generator
+<p align="center"><img src="https://imgur.com/AuFdzQQ.png" width="100" /></p>
+<h1 align="center">Apollo Prophecy</h1>
 
-[![Build Status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master)](https://travis-ci.com/theGlenn/apollo-prophecy)
+<div align="center">
+🙏📟🙏
+</div>
 
-📟 Command tool to generate **throwable** Apollo errors for your server while also being able to expose through your API as documentation.
+<div align="center">
+  Command tool to generate errors files for your Appolo Server and Client 
+</div>
+
+<div align="center">
+  <!-- NPM version -->
+  <a href="https://npmjs.org/package/apollo-prophecy">
+    <img src="https://img.shields.io/npm/v/apollo-prophecy.svg?style=flat-square"
+      alt="NPM version" />
+  </a>
+  <!-- Build Status -->
+  <a href="https://travis-ci.com/theGlenn/apollo-prophecy">
+    <img src="https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square"
+      alt="Build Status" />
+  </a>
+</div>
+
+
+
+## 📟 Features
+* Generate **throwable** Apollo errors for your server from a json file
+* Expose spec compliant graphql errors through your api documentation
 
 ## Install
-First, you should install `apollo-prophecy` globaly
+First, install `apollo-prophecy` globaly
 
 ```sh
 npm install -g apollo-prophecy
