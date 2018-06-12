@@ -1,3 +1,4 @@
+<p align="center"><img src="https://imgur.com/AuFdzQQ.png" width="100" /></p>
 <h1 align="center">Apollo Prophecy</h1>
 
 <div align="center">
