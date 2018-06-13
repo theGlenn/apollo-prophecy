@@ -26,16 +26,12 @@ const makeHeaders = (headers: string[] = []) => {
 
 export default async function ask ({ input, errorType, headers, outputFilePath }: AskArgs) {
   const urlRegex = /^https?:\/\//i;
-  //   jsonFilePath?: string,
   console.log('🔮 Connecting with the oracles...');
 
   let errorEntries: ErrorEntries = {}
   if (urlRegex.test(input)) {
     errorEntries = await queryServer(input, errorType, makeHeaders(headers));
-  } else {
-
   }
-
   const rawFileContent = createFileFromEntries(errorEntries);
   const outputPath = writeClassFile(rawFileContent, outputFilePath);
   console.log('├── You will fail... but successfully');

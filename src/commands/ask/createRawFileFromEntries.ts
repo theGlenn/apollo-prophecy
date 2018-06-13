@@ -1,9 +1,9 @@
 import { ErrorEntries } from "../../types";
 
-const TopMostImportsAndConfigDef = `
-/* tslint:disable */ 
+const TopMostImportsAndConfigDef = `/* tslint:disable */ 
 import { ApolloError } from "apollo-client";
 import { GraphQLError } from "graphql";`
+
 const PropheticErrorCodeEnumDef = `
 export enum PropheticErrorCode {
   CodeLessError = 'NONE',
@@ -88,16 +88,13 @@ export const isThis = (error: ApolloError | GraphQLError | undefined) => {
   return new PropheticErrorHandled(codes);
 }`
 export default function(entries: ErrorEntries) {
-  console.log(entries)
   const nameAndCodeTuples: [string, string][] = Object.keys(entries).map((key) => {
     const { extensions = { code: undefined } } = entries[key];
     return [key, extensions.code] as [string, string]
-  }).filter(([_, code]) => code !== undefined);
+  })
+  .filter(([_, code]) => code !== undefined);
 
-
-  const enums = nameAndCodeTuples.map(([name, code]) => {
-    return `${name} = "${code}"`;
-  }).join(',\n ');
+  const enums = nameAndCodeTuples.map(([name, code]) => `${name} = "${code}"`).join(',\n ');
 
   const errorDefFun = nameAndCodeTuples.map(([name]) => {
     return `${PropheticErrorGetterDef.replace("$_ENUM_$", name).replace("$_ENUM_$", name)}`;
@@ -107,8 +104,7 @@ export default function(entries: ErrorEntries) {
     return `${PropheticErrorHandlerDef.replace("$_ENUM_$", name).replace("$_ENUM_$", name)}`;
   }).join('\n');
 
-  return `
-  ${TopMostImportsAndConfigDef}
+  return `${TopMostImportsAndConfigDef}
   ${PropheticErrorCodeEnumDef.replace('_VALUES_', enums)}
   ${PropheticErrorDef.replace('_FUNCTIONS_', errorDefFun)}
   ${PropheticErrorHandledDef.replace('_FUNCTIONS_', errorHandledFun)}

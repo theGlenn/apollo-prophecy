@@ -19,7 +19,7 @@ const makeOperation = (erroType: string) => ({
 
 type Headers = {[name: string]: string}
 
-export function exeuteServerQuery(serverUri: string, type: string, headers: Headers) {
+function exeuteServerQuery(serverUri: string, type: string, headers: Headers) {
   const operation = makeOperation(type);
   const link = new HttpLink({ uri: serverUri, fetch, headers });
 
