@@ -9,7 +9,7 @@ import { generate, askErrors } from './commands';
 // apollo-prophecy ask-erros http://localhost:3000/graphql -q Errs.ts
 interface Args extends ParsedArgs {
   generate?: string
-  "ask-errors"?: string
+  "ask"?: string
 
   file?: string
   f?: string
@@ -19,6 +19,8 @@ interface Args extends ParsedArgs {
 
   query?: string
   q?: string
+
+  type?: string
 };
 
 type Method = 'generate' | 'ask-errors'
@@ -35,7 +37,10 @@ if(argv._.length > 0) {
     const jsonfile = file || f || argv._[1];
     const outFile = out || o;
     generate({ intputFilePath: jsonfile, outputFilePath: outFile });
-  } else if(method === 'ask-errors') {
-    askErrors()
+  } else if(method === 'ask') {
+    const { type: errorType, file, f, out, o } = argv;
+    const input = file || f || argv._[1];
+    const outFile = out || o;
+    askErrors({ input, errorType });
   }
 }

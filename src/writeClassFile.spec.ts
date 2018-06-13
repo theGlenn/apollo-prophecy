@@ -1,12 +1,11 @@
-import * as mocha from 'mocha';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as chai from 'chai';
 import * as chaiFS from 'chai-fs';
 
-import { rmrf } from './../../utils';
 import writeClassFile from './writeClassFile'
+import { rmrf } from './utils';
 
 chai.use(chaiFS);
 const { expect } = chai;

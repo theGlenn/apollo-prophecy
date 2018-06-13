@@ -42,7 +42,7 @@ Usage: apollo-prophecy [command]
 
 Commands:
   apollo-prophecy generate [--file] [--out]
-  apollo-prophecy ask-errors <graphql endpoint> [--query]
+  apollo-prophecy ask-errors <graphql endpoint> [--type]
 
 Options:
   -h, --help     Show help                                             [boolean]

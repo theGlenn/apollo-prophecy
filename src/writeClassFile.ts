@@ -1,5 +1,5 @@
-import { writeFile, mkdirs, rmrf } from './../../utils'
 import { parse , normalize } from 'path';
+import { mkdirs, writeFile } from './utils';
 
 export default (content: string, output: string = '_generated') => {
   const outputPath = normalize(output);
