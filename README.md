@@ -24,21 +24,23 @@
 </div>
 
 ## 📟 Features
+
 * Generate **Server-side** **throwable** errors in your resolvers like `throw new NotAProphetError()`
 * Expose **machine readable** graphql errors through your api documentation
 * Generate **Client-side** Apollo errors **consumable** like `errorHere(error).isNotAProphetError ?`
 
-### Table of Contents
-**[Installation](#installation)**<br>
-**[Usage](#usage)**
-* **[Server](#server)**
-* **[Client](#client)**<br>
+# 📋 Table of Contents
 
-**[TODO](#todo)**<br>
-**[Contribute](#contribute)**<br>
-**[Test and Miscellaneous](#run-tests)**<br>
+  * [Installation](#installation)
+  * [Usage](#usage)
+     * [Server Side](#server)
+     * [Client Side](#client)
+  * [Todo](#todo)
+  * [Contribute](#contribute)
+  * [Test and Miscellaneous](#run-tests)
 
 ## Installation
+
 First, install `apollo-prophecy` globaly
 
 ```sh
@@ -60,7 +62,9 @@ Options:
 ```
 
 ### Server
+
 #### `generate` command
+
 This command creates the `Error.ts` file from a `JSON` input file, using `--out` param you can change the name and location.
 Input file should at least contains the keys `message` and `code`
 
@@ -130,7 +134,9 @@ export const errorType = `
 ```
 
 ### Client
+
 #### `ask` command
+
 This command queries the `errors` field on a graphql endpoint and creates an `Errors.ts` file containing **helpers** for all the errors exposed through the server api documentation.
 
 ```sh
@@ -138,6 +144,7 @@ apollo-prophecy ask http://localhost:3000/graphql
 ```
 
 #### Usage
+
 In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two methods `errorHere` and `isThis`, both takes one paramater of type `ApolloError` or `GraphQLError`.
 
 ##### `errorHere()` function
@@ -158,6 +165,7 @@ import { errorHere } from `./_generated/Errors.ts`;
 ```
 
 ##### `isThis()` function
+
 `isThis` returns an object that has a **handler** method for each errors.
 It perfoms a simple check on the `error` argument, if the it succeed the corresponding handler is called otherwise nothing happens.
 
@@ -191,19 +199,24 @@ import { isThis } from `./_generated/Errors.ts`;
 }
 ```
 
-## TODO
+## Contributing
+
+[![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
+
+<div align="center">
+✊ Grab an issue -> 🍴 fork **develop** -> 👨‍💻 Code  -> 🛠 Test -> 📩 Pull Request -> 💥💥💥
+</div>
+
+### TODO
+
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
 
 [i1]: https://github.com/theGlenn/apollo-prophecy/issues/1
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
 [i3]: https://github.com/theGlenn/apollo-prophecy/issues/3
 
-## Contributing
-[![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
+### Running tests locally:
 
-✊ Grab an issue -> 🍴 fork **develop** -> 👨‍💻 Code  -> 🛠 Test -> 📩 Pull Request -> 💥💥💥
-
-Running tests locally:
 ```sh
 npm test
 ```
