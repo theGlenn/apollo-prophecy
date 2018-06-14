@@ -43,7 +43,8 @@ describe('generateRawClass', () => {
     }
 
     type PropheticError {
-      message: String
+      name: String
+      message: String?
       extensions: PropheticErrorExtensions
     }`));
   });

@@ -73,8 +73,8 @@ export function generatePropheticErrorType(typesArray: ScalarTypesMap[]) {
     }
     
     type PropheticError {
-      message: String?
       name: String
+      message: String?
       extensions: PropheticErrorExtensions
     }
   `
