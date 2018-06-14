@@ -1,47 +1,29 @@
-import { expect } from 'chai';
-import createRawFileFromEntries from './createRawFileFromEntries'
-import { writeFile } from '../../utils/fs-prophecy';
-
-const errors = [{
-    "name": "UnknownError",
-    "message": "An unknown error has occurred!  Please try again later",
-    extensions: {
-      "code": "UNKNOWN"
-    }
-  }, {
-    "name": "ForbiddenError",
-    "message": "You are not allowed to do this",
-    extensions: {
-      "code": "FORBIDDEN"
-    }
-  }, {
-    "name": "AuthenticationRequiredError",
-    "message": "You must be logged in to do this",
-    extensions: {
-      "code": "AUTH_REQUIRED"
-    }
-  }];
-
-const expectedFile = `/* tslint:disable */ 
+/* tslint:disable */ 
 import { ApolloError } from "apollo-client";
 import { GraphQLError } from "graphql";
   
 export enum PropheticErrorCode {
   CodeLessError = 'NONE',
-  UnknownError = "UNKNOWN",
-  ForbiddenError = "FORBIDDEN",
-  AuthenticationRequiredError = "AUTH_REQUIRED"
+  UnknownError = "CAN_NOT_FETCH_BY_ID",
+  ForbiddenError = "null",
+  AuthenticationRequiredError = "AUTH_REQUIRED",
+  MagicTokenExpiredError = "MAGIC_TOKEN_EXPIRED",
+  UserNotFoundError = "USER_NOT_FOUND",
+  UserAlreadyExist = "USER_ALREADY_EXISTS"
 }
   
 export class PropheticError {
   constructor(public codes: string[]){}
 
-  private inCodes(code: PropheticErrorCode){ return this.codes.indexOf(code) > -1; }
+  private inCodes(code: PropheticErrorCode) { return this.codes.indexOf(code) > -1; }
 
   get isCodeLessError() { return this.inCodes(PropheticErrorCode.CodeLessError); }
   get isUnknownError() { return this.inCodes(PropheticErrorCode.UnknownError); }
   get isForbiddenError() { return this.inCodes(PropheticErrorCode.ForbiddenError); }
   get isAuthenticationRequiredError() { return this.inCodes(PropheticErrorCode.AuthenticationRequiredError); }
+  get isMagicTokenExpiredError() { return this.inCodes(PropheticErrorCode.MagicTokenExpiredError); }
+  get isUserNotFoundError() { return this.inCodes(PropheticErrorCode.UserNotFoundError); }
+  get isUserAlreadyExist() { return this.inCodes(PropheticErrorCode.UserAlreadyExist); }
 }
   
 export interface Handler {
@@ -65,6 +47,9 @@ export class PropheticErrorHandled {
   UnknownError(handler: Handler) { return this.inCodes(PropheticErrorCode.UnknownError, handler); }
   ForbiddenError(handler: Handler) { return this.inCodes(PropheticErrorCode.ForbiddenError, handler); }
   AuthenticationRequiredError(handler: Handler) { return this.inCodes(PropheticErrorCode.AuthenticationRequiredError, handler); }
+  MagicTokenExpiredError(handler: Handler) { return this.inCodes(PropheticErrorCode.MagicTokenExpiredError, handler); }
+  UserNotFoundError(handler: Handler) { return this.inCodes(PropheticErrorCode.UserNotFoundError, handler); }
+  UserAlreadyExist(handler: Handler) { return this.inCodes(PropheticErrorCode.UserAlreadyExist, handler); }
   handle() { return this.handler(); }
 }
   
@@ -94,11 +79,4 @@ export const isThis = (error: ApolloError | GraphQLError | undefined) => {
   }
   const codes = findCodes(error);
   return new PropheticErrorHandled(codes);
-}`
-
-describe('createRawFile', () => {
-  it('Should correctly generate raw file', () => {
-    const errorsRawFile = createRawFileFromEntries(errors);
-    expect(errorsRawFile).to.be.eq(expectedFile);
-  });
-});
+}

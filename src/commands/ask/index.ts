@@ -1,4 +1,4 @@
-import { ErrorEntries } from "../../types";
+import { JsonOutputEntriesRecord, ErrorOutputEntry } from "../../types";
 import queryServer from "./queryServer";
 import createFileFromEntries from "./createRawFileFromEntries";
 import writeClassFile from "../../writeClassFile";
@@ -27,7 +27,7 @@ const makeHeaders = (headers: string[] = []) => {
 export default async function ask({ input, errorField, headers, outputFilePath }: AskArgs) {
   const urlRegex = /^https?:\/\//i;
 
-  let errorEntries: ErrorEntries = {}
+  let errorEntries: ErrorOutputEntry[] = []
   if (urlRegex.test(input)) {
     errorEntries = await queryServer(input, errorField, makeHeaders(headers));
   }

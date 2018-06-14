@@ -1,8 +1,8 @@
-import { execute, makePromise } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag';
 import fetch from 'node-fetch';
-import { ErrorEntry, toErrorEntries } from '../../types';
+import { execute, makePromise } from 'apollo-link';
+import { HttpLink } from 'apollo-link-http';
+import { toErrorEntries, ErrorOutputEntry } from '../../types';
 
 const makeOperation = (erroType: string) => ({
   query: gql`query {
@@ -43,5 +43,5 @@ export default async function(serverUri: string, field: string = 'errors', heade
   }
 
   const errors = result.data[field];
-  return toErrorEntries(errors as ErrorEntry[]);
+  return errors as ErrorOutputEntry[];
 }

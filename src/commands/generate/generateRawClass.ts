@@ -1,10 +1,10 @@
 import createError, { PropheticErrorTextDef } from './createError'
-import { ErrorEntries, ErrorEntry } from './../../types'
+import { JsonInputErrorEntryRecord, JsonInputErrorEntry, toOutputErrors } from '../../types';
 
 export type ScalarType = "Boolean" | "Int" | "Float" | "String"
 export type ScalarTypesMap = {[key: string]: ScalarType};
 
-function scalaraTypeFromValue(value: any): ScalarType {
+function scalarGQLTpeFromValue(value: any): ScalarType {
   switch (typeof value) {
     case "string":
       return "String"
@@ -21,20 +21,18 @@ function scalaraTypeFromValue(value: any): ScalarType {
   }
 }
 
-function createDefinitions(entries: ErrorEntries) {
-  const errors = []
-  for (let key in entries) {
+export function toRawClassesArray(entries: JsonInputErrorEntryRecord) {
+  return Object.keys(entries).map((key) => {
     const { message, code, ...rest } = entries[key];
-    const errorPart = createError(key, message, code, rest);
-    errors.push(errorPart);
-  }
-  return errors;
+    return createError(key, message, code, rest);
+  });
 }
 
-export function mapFieldToGraphQLTypes(entries: ErrorEntries): ScalarTypesMap[] {
-  return Object.values(entries).map((entry) => Object.keys(entry).reduce((prev, entryFieldKey) => {
+export const exludeMessageAndName = (entry: JsonInputErrorEntry) => Object.keys(entry).filter(key => key !== 'message' || 'name')
+export function toScalarTypesMap(entries: JsonInputErrorEntryRecord): ScalarTypesMap[] {
+  return Object.values(entries).map((entry) => Object.keys(entry).filter(key => key !== 'message').reduce((prev, entryFieldKey) => {
     const fieldValue = entry[entryFieldKey];
-    const fieldType = scalaraTypeFromValue(fieldValue);
+    const fieldType = scalarGQLTpeFromValue(fieldValue);
     prev[entryFieldKey] = fieldType;
     return prev;
   }, {}),{});
@@ -43,9 +41,8 @@ export function mapFieldToGraphQLTypes(entries: ErrorEntries): ScalarTypesMap[] 
 type TypeDefinition = { type: string, isNullableType: boolean }
 type TypeDefinitionsMap = {[key: string]: TypeDefinition }
 
-export function createGraphqlType(entries: ErrorEntries) {
-  const fieldsTypesMapArray = mapFieldToGraphQLTypes(entries);
-  const fieldsReduced = fieldsTypesMapArray.reduce((prev: TypeDefinitionsMap, typesMap) => {
+export function generatePropheticErrorType(typesArray: ScalarTypesMap[]) {
+  const fieldsReduced = typesArray.filter(type => type).reduce((prev: TypeDefinitionsMap, typesMap) => {
     const isFirst = prev === {}
 
     for (let key in typesMap) {
@@ -64,29 +61,40 @@ export function createGraphqlType(entries: ErrorEntries) {
     }
     return prev;
   },{}) as TypeDefinitionsMap
-  const fields = Object.entries(fieldsReduced).map(([name, { type, isNullableType}]) => {
+
+
+  const fields = Object.entries(fieldsReduced).map(([name, { type, isNullableType } ]) => {
     return `${name}: ${type}${isNullableType ? '?': ''}`
   });
   
   return `
-    type PropheticError {
+    type PropheticErrorExtensions {
       ${fields.join('\n      ')}
+    }
+    
+    type PropheticError {
+      message: String?
+      name: String
+      extensions: PropheticErrorExtensions
     }
   `
 }
 
-export default function (entries: ErrorEntries) {
-  const allErros = createDefinitions(entries).join('\n');
-  const type = createGraphqlType(entries);
+export default function (entries: JsonInputErrorEntryRecord) {
+  const rawErrorClasses = toRawClassesArray(entries).join('\n');
+  const fieldsTypesMapArray = toScalarTypesMap(entries);
+  const rawPropheticErrorAndExtensionsType = generatePropheticErrorType(fieldsTypesMapArray);
+  const errorsList = toOutputErrors(entries);
+
   const classFile = `
   import { ApolloError } from 'apollo-server'
 
-  export const definitions = ${JSON.stringify(entries, null, 2)};
-  export const errorType = \`${type}\`;
+  export const errorsList = ${JSON.stringify(errorsList, null, 2)};
+  export const errorType = \`${rawPropheticErrorAndExtensionsType}\`;
   
   ${PropheticErrorTextDef}
   
-  ${allErros}
+  ${rawErrorClasses}
   `
   return classFile;
 }

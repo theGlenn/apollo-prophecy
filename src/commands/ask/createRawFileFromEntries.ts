@@ -1,4 +1,4 @@
-import { ErrorEntries } from "../../types";
+import { JsonOutputEntriesRecord, ErrorOutputEntry, toErrorEntries } from "../../types";
 
 const TopMostImportsAndConfigDef = `/* tslint:disable */ 
 import { ApolloError } from "apollo-client";
@@ -74,13 +74,17 @@ export const isThis = (error: ApolloError | GraphQLError | undefined) => {
   const codes = findCodes(error);
   return new PropheticErrorHandled(codes);
 }`
-export default function(entries: ErrorEntries) {
-  const nameAndCodeTuples: [string, string][] = Object.keys(entries).map((key) => {
+
+const toNameAndCodeTupleArray = (entriesArray: ErrorOutputEntry[]) => {
+  const entries = toErrorEntries(entriesArray);
+  return Object.keys(entries).map((key) => {
     const { extensions = { code: undefined } } = entries[key];
     return [key, extensions.code] as [string, string]
-  })
-  .filter(([_, code]) => code !== undefined);
+  }).filter(([_, code]) => code !== undefined);
+}
 
+export default function(entries: ErrorOutputEntry[]) {
+  const nameAndCodeTuples = toNameAndCodeTupleArray(entries);
   const enums = nameAndCodeTuples.map(([name, code]) => `${name} = "${code}"`).join(',\n  ');
 
   const errorDefFun = nameAndCodeTuples.map(([name]) => {
