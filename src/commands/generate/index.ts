@@ -1,5 +1,5 @@
 import generateRawClass from './generateRawClass';
-import { readJsonDef } from '../../utils';
+import { readJsonDef } from './../../utils';
 import writeClassFile from '../../writeClassFile';
 
 export interface ProphecyArgs {

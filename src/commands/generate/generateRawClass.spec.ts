@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
-import { classNoWP } from './test.utils'
 import { mapFieldToGraphQLTypes, createGraphqlType } from './generateRawClass'
+import { removeWhiteSpaces } from '../../utils';
 
 const errors = {
   UnknownError: {
@@ -38,7 +38,7 @@ describe('createError', () => {
 
   it('Should correctly create the GraphQL Type Definition string', () => {
     const type = createGraphqlType(errors);
-    expect(classNoWP(type)).to.be.eq(classNoWP(`
+    expect(removeWhiteSpaces(type)).to.be.eq(removeWhiteSpaces(`
     type PropheticError {
       message: String
       code: String?

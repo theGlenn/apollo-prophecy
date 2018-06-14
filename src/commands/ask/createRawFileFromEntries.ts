@@ -14,21 +14,13 @@ const PropheticErrorDef = `
 export class PropheticError {
   constructor(public codes: string[]){}
 
-  private inCodes(code: PropheticErrorCode){
-    return this.codes.indexOf(code) > -1;
-  }
+  private inCodes(code: PropheticErrorCode){ return this.codes.indexOf(code) > -1; }
 
-  get isCodeLessError() {
-    return this.inCodes(PropheticErrorCode.CodeLessError)
-  }
-
+  get isCodeLessError() { return this.inCodes(PropheticErrorCode.CodeLessError); }
   _FUNCTIONS_
 }`;
 
-const PropheticErrorGetterDef = `
-  get is$_ENUM_$() {
-    return this.inCodes(PropheticErrorCode.$_ENUM_$)
-  }`;
+const PropheticErrorGetterDef = "get is$_ENUM_$() { return this.inCodes(PropheticErrorCode.$_ENUM_$); }";
 
 const PropheticErrorHandledDef = `
 export interface Handler {
@@ -48,16 +40,10 @@ export class PropheticErrorHandled {
     return this;
   }
 
-  CodeLessError(handler: Handler) {
-    return this.inCodes(PropheticErrorCode.CodeLessError, handler);
-  }
-
+  CodeLessError(handler: Handler) { return this.inCodes(PropheticErrorCode.CodeLessError, handler); }
   _FUNCTIONS_
 }`
-const PropheticErrorHandlerDef = `
-  $_ENUM_$(handler: Handler) {
-    return this.inCodes(PropheticErrorCode.$_ENUM_$, handler);
-  }`;
+const PropheticErrorHandlerDef = "$_ENUM_$(handler: Handler) { return this.inCodes(PropheticErrorCode.$_ENUM_$, handler); }";
 
 const BottomExportedMethods = `
 const CODE_LESS_EXTENSION = { code: 'NONE'};
@@ -94,15 +80,15 @@ export default function(entries: ErrorEntries) {
   })
   .filter(([_, code]) => code !== undefined);
 
-  const enums = nameAndCodeTuples.map(([name, code]) => `${name} = "${code}"`).join(',\n ');
+  const enums = nameAndCodeTuples.map(([name, code]) => `${name} = "${code}"`).join(',\n  ');
 
   const errorDefFun = nameAndCodeTuples.map(([name]) => {
     return `${PropheticErrorGetterDef.replace("$_ENUM_$", name).replace("$_ENUM_$", name)}`;
-  }).join('\n ');
+  }).join('\n  ');
 
   const errorHandledFun = nameAndCodeTuples.map(([name]) => {
     return `${PropheticErrorHandlerDef.replace("$_ENUM_$", name).replace("$_ENUM_$", name)}`;
-  }).join('\n');
+  }).join('\n  ');
 
   return `${TopMostImportsAndConfigDef}
   ${PropheticErrorCodeEnumDef.replace('_VALUES_', enums)}

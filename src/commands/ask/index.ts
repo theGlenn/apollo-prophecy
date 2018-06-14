@@ -24,7 +24,7 @@ const makeHeaders = (headers: string[] = []) => {
   return additionalHeaders;
 }
 
-export default async function ask ({ input, errorType, headers, outputFilePath }: AskArgs) {
+export default async function ask({ input, errorType, headers, outputFilePath }: AskArgs) {
   const urlRegex = /^https?:\/\//i;
   console.log('🔮 Connecting with the oracles...');
 
