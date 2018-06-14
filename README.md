@@ -6,7 +6,6 @@
 <br/><strong>You shall fail... successfully</strong>
 </div>
 
-
 <div align="center">
   Command tool to generate errors files for your Appolo Server and Client 
 </div>
@@ -25,12 +24,21 @@
 </div>
 
 ## 📟 Features
-* Generate **Server-side** errors **throwable** in your resolvers like `throw new NotAProphetError()`
+* Generate **Server-side** **throwable** errors in your resolvers like `throw new NotAProphetError()`
 * Expose **machine readable** graphql errors through your api documentation
-* Generate **Client-side** Apollo errors **consumable** like `errorHere(error).isNotAProphetError()`
+* Generate **Client-side** Apollo errors **consumable** like `errorHere(error).isNotAProphetError ?`
 
+### Table of Contents
+**[Installation](#installation)**<br>
+**[Usage](#usage)**
+* **[Server](#server)**
+* **[Client](#client)**<br>
 
-## Install
+**[TODO](#todo)**<br>
+**[Contribute](#contribute)**<br>
+**[Test and Miscellaneous](#run-tests)**<br>
+
+## Installation
 First, install `apollo-prophecy` globaly
 
 ```sh
@@ -43,8 +51,8 @@ npm install -g apollo-prophecy
 Usage: apollo-prophecy [command]
 
 Commands:
-  apollo-prophecy generate [--file] [--out]
-  apollo-prophecy ask-errors <graphql endpoint> [--type]
+  apollo-prophecy generate <json file> [--file] [--out]
+  apollo-prophecy ask <graphql endpoint> [--type]
 
 Options:
   -h, --help     Show help                                             [boolean]
@@ -182,7 +190,6 @@ import { isThis } from `./_generated/Errors.ts`;
   <p style={{color: '#FF495C'}}>
 }
 ```
-
 
 ## TODO
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
