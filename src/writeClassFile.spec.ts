@@ -1,12 +1,11 @@
-import * as mocha from 'mocha';
-import * as fs from 'fs';
 import * as os from 'os';
+import * as osFs from 'fs';
 import * as path from 'path';
 import * as chai from 'chai';
 import * as chaiFS from 'chai-fs';
 
-import { rmrf } from './../../utils';
 import writeClassFile from './writeClassFile'
+import { fs } from './utils';
 
 chai.use(chaiFS);
 const { expect } = chai;
@@ -14,7 +13,7 @@ const { expect } = chai;
 const mkdirTmp = () => {
   const tmpDir = os.tmpdir();
   const dirLocation = path.join(os.tmpdir(), 'apollo-prophetic-test-');
-  return fs.mkdtempSync(dirLocation);
+  return osFs.mkdtempSync(dirLocation);
 };
 
 describe('createClassFile', () => {
@@ -26,7 +25,7 @@ describe('createClassFile', () => {
     ((expect(tmpDirPath).to.be.a) as any).directory(tmpDirPath).with.files(['Errors.ts']);
     ((expect(tmpErrorsPath).to.be.a) as any).to.be.a.file().with.content("class SpecialError {}");
 
-    rmrf(tmpDirPath);
+    fs.rmrf(tmpDirPath);
   });
 
   it('Should create a folder with the "Errs.ts file" in it', () => {
@@ -35,6 +34,6 @@ describe('createClassFile', () => {
     ((expect(tmpDirPath).to.be.a) as any).to.be.a.file().and.not.empty;
     ((expect(tmpDirPath).to.be.a) as any).to.be.a.file().with.content("class SpecialError {}");
 
-    rmrf(tmpDirPath);
+    fs.rmrf(tmpDirPath);
   });
 });

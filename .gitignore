@@ -6,3 +6,7 @@ node_modules
 *.log
 _generated/
 _generated/Errors.ts
+.nyc_output
+coverage
+Errors.ts
+errors.json

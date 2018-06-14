@@ -1,1 +1,0 @@
-export const classNoWP = (classText: string) => classText.replace(/[^a-zA-Z]/g, "");

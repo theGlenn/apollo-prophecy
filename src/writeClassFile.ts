@@ -1,5 +1,5 @@
-import { writeFile, mkdirs, rmrf } from './../../utils'
 import { parse , normalize } from 'path';
+import { fs } from './utils';
 
 export default (content: string, output: string = '_generated') => {
   const outputPath = normalize(output);
@@ -14,11 +14,10 @@ export default (content: string, output: string = '_generated') => {
   const outputFile = fileSpecified ? parse(outputPath).base : 'Errors.ts';
   const outputDirectory = fileSpecified ? parse(outputPath).dir : outputPath;
 
-  //rmrf(outputDirectory);
-  mkdirs(outputDirectory);
+  fs.mkdirs(outputDirectory);
 
   const outputFilePath = normalize(`${outputDirectory}/${outputFile}`);
-  writeFile(outputFilePath, content);
+  fs.writeFile(outputFilePath, content);
 
   return outputFilePath;
 }

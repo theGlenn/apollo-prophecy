@@ -1,48 +1,56 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
-import { classNoWP } from './test.utils'
-import { mapFieldToGraphQLTypes, createGraphqlType } from './generateRawClass'
+import { toRawClassesArray,toScalarTypesMap, generatePropheticErrorType } from './generateRawClass'
+import { removeWhiteSpaces } from '../../utils';
 
 const errors = {
   UnknownError: {
     "message": "An unknown error has occurred!  Please try again later",
-    "code": "CAN_NOT_FETCH_BY_ID"
+    "code": "UNKNOWN"
   },
   ForbiddenError: {
-    "message": "You are not allowed to do this"
+    "message": "You are not allowed to do this",
+    "code": "FORBIDDEN",
   },
   AuthenticationRequiredError: {
     "message": "You must be logged in to do this",
     "code": "AUTH_REQUIRED"
   },
-  "MagicTokenExpiredError": {
-    "message": "Token expired try login-in again",
-    "code": "MAGIC_TOKEN_EXPIRED"
-  },
 };
 
-const types = [
-  { message: "String", code: "String" },
-  { message: "String" },
-  { message: "String", code: "String" },
-  { message: "String", code: "String"}
-];
+const expectedTypes = [ { code: "String" }, { code: "String" }, { code: "String" }];
 
-describe('createError', () => {
-  it('Should correctly map object fields to the right type', () => {
-    const errorFieldsType = mapFieldToGraphQLTypes(errors);
-
-    expect(errorFieldsType).to.be.eql(types);
-    //expect(() => { throw new SpecialError()}).to.throw('SpecialError');
+describe('generateRawClass', () => {
+  it('toRawClassesArray should correctly returns string classes definition', () => {
+    const rawClasses = toRawClassesArray(errors);
+    expect(rawClasses.length).to.be.eq(3);
+    expect(removeWhiteSpaces(rawClasses[1])).to.be.eql(removeWhiteSpaces(`
+    export class ForbiddenError extends PropheticError {
+      constructor(properties?: Record<string, any>) {
+        super("ForbiddenError", "You are not allowed to do this", "FORBIDDEN" }, properties);
+      }
+    }
+    `));
   });
 
   it('Should correctly create the GraphQL Type Definition string', () => {
-    const type = createGraphqlType(errors);
-    expect(classNoWP(type)).to.be.eq(classNoWP(`
-    type PropheticError {
-      message: String
+    const scalarTypesArray = toScalarTypesMap(errors);
+    const rawGraphqlTypes = generatePropheticErrorType(scalarTypesArray);
+    
+    expect(removeWhiteSpaces(rawGraphqlTypes)).to.be.eq(removeWhiteSpaces(`
+    type PropheticErrorExtensions {
       code: String?
     }
-    `));
+
+    type PropheticError {
+      name: String
+      message: String?
+      extensions: PropheticErrorExtensions
+    }`));
+  });
+
+  it('Should correctly map object fields to the right type', () => {
+    const scalarTypesArray = toScalarTypesMap(errors);
+    expect(scalarTypesArray).to.be.eql(expectedTypes);
   });
 });

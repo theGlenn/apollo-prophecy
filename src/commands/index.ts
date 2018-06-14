@@ -1,2 +1,2 @@
 export { default as generate } from './generate'
-export { default as askErrors } from './ask-errors'
+export { default as ask } from './ask'
