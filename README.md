@@ -2,7 +2,7 @@
 <h1 align="center">Apollo Prophecy</h1>
 
 <div align="center">
-🙏📟🙏
+👁📟👁
 <br/><strong>You shall fail... successfully</strong>
 </div>
 
@@ -199,10 +199,12 @@ import { isThis } from `./_generated/Errors.ts`;
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
 [i3]: https://github.com/theGlenn/apollo-prophecy/issues/3
 
-## Contribute
-Take an issue fork `/develop` -> work -> test -> pull request -> 💥
+## Contributing
+[![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
-## Run tests
+✊ Grab an issue -> 🍴 fork **develop** -> 👨‍💻 Code  -> 🛠 Test -> 📩 Pull Request -> 💥💥💥
+
+Running tests locally:
 ```sh
 npm test
 ```
