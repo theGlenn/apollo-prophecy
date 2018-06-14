@@ -109,16 +109,20 @@ Now you can use it the following way `throw new UserNotFoundError()` in your res
 
 ```ts
 ...
-export const definitions = {
-  "AuthenticationRequiredError": {
+export const definitions = [{
+    "name": "AuthenticationRequiredError"
     "message": "You must be logged in to do this",
-    "code": "AUTH_REQUIRED"
-  },
-  "UserNotFoundError": {
+    "extensions": {
+      "code": "AUTH_REQUIRED"
+    }
+  }, {
+    "name": "UserNotFoundError"
     "message": "No user found",
-    "code": "USER_NOT_FOUND"
+    "extensions": {
+      "code": "USER_NOT_FOUND"
+    }
   }
-};
+}];
 
 export const errorType = `
   type PropheticErrorExtensions {
@@ -126,7 +130,7 @@ export const errorType = `
   }
 
   type PropheticError {
-    message: String
+    message: String?
     extensions: PropheticErrorExtensions
   }
 `;
