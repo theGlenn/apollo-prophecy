@@ -51,8 +51,8 @@ npm install -g apollo-prophecy
 Usage: apollo-prophecy [command]
 
 Commands:
-  apollo-prophecy generate <json file> [--file] [--out]
-  apollo-prophecy ask <graphql endpoint> [--type]
+  apollo-prophecy generate <json file> [--out]
+  apollo-prophecy ask <graphql endpoint> [--field] [--out]
 
 Options:
   -h, --help     Show help                                             [boolean]
