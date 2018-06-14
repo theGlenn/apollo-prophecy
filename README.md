@@ -193,7 +193,6 @@ import { isThis } from `./_generated/Errors.ts`;
 
 ## TODO
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
-* See [#3][i3]: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing
 
 [i1]: https://github.com/theGlenn/apollo-prophecy/issues/1
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
