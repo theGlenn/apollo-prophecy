@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
 import createError from './createError'
-import { classNoWP } from './test.utils'
+import { removeWhiteSpaces } from './../../utils'
 
 describe('createError', () => {
   it('Should create Special error classs string', () => {
@@ -13,7 +13,6 @@ describe('createError', () => {
       }
     }
     `;
-    expect(classNoWP(SpecialError)).to.be.eq(classNoWP(expectedClass));
-    //expect(() => { throw new SpecialError()}).to.throw('SpecialError');
+    expect(removeWhiteSpaces(SpecialError)).to.be.eq(removeWhiteSpaces(expectedClass));
   });
 });

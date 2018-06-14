@@ -5,8 +5,6 @@ import  {
   gql,
 } from 'apollo-server';
 
-type ErrorEntry = { [key:string]: any }
-
 export const PropheticErrorTextDef = `class PropheticError extends ApolloError {
   constructor(name: string, message: string, code?: string, properties?: Record<string, any>) {
     super(message, code, properties);
@@ -17,7 +15,6 @@ export const PropheticErrorTextDef = `class PropheticError extends ApolloError {
     Object.defineProperty(this, 'name', { value: name });
   }
 }`
-
 
 export default function(name: string, message: string, code?: string, properties?: Record<string, any>) {
   return `

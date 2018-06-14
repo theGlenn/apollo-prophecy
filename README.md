@@ -2,7 +2,8 @@
 <h1 align="center">Apollo Prophecy</h1>
 
 <div align="center">
-🙏📟🙏
+👁📟👁
+<br/><strong>You shall fail... successfully</strong>
 </div>
 
 <div align="center">
@@ -22,13 +23,22 @@
   </a>
 </div>
 
-
-
 ## 📟 Features
-* Generate **throwable** Apollo errors for your server from a json file
-* Expose spec compliant graphql errors through your api documentation
+* Generate **Server-side** **throwable** errors in your resolvers like `throw new NotAProphetError()`
+* Expose **machine readable** graphql errors through your api documentation
+* Generate **Client-side** Apollo errors **consumable** like `errorHere(error).isNotAProphetError ?`
 
-## Install
+### Table of Contents
+**[Installation](#installation)**<br>
+**[Usage](#usage)**
+* **[Server](#server)**
+* **[Client](#client)**<br>
+
+**[TODO](#todo)**<br>
+**[Contribute](#contribute)**<br>
+**[Test and Miscellaneous](#run-tests)**<br>
+
+## Installation
 First, install `apollo-prophecy` globaly
 
 ```sh
@@ -41,8 +51,8 @@ npm install -g apollo-prophecy
 Usage: apollo-prophecy [command]
 
 Commands:
-  apollo-prophecy generate [--file] [--out]
-  apollo-prophecy ask-errors <graphql endpoint> [--query]
+  apollo-prophecy generate <json file> [--file] [--out]
+  apollo-prophecy ask <graphql endpoint> [--type]
 
 Options:
   -h, --help     Show help                                             [boolean]
@@ -50,14 +60,15 @@ Options:
 ```
 
 ### Server
-#### `generate`
-This command creates the `Error.ts` file from a `Json` definition file, using `--out` param you can change the name and location.
+#### `generate` command
+This command creates the `Error.ts` file from a `JSON` input file, using `--out` param you can change the name and location.
+Input file should at least contains the keys `message` and `code`
 
 ```sh
 apollo-prophecy generate errors.json
 ```
 
-For example given the following `errors.json`:
+For example given the following `errors.json` as input:
 
 ```json
 {
@@ -72,7 +83,7 @@ For example given the following `errors.json`:
 }
 ```
 
-Apollo Errorgen will generate the following `Errors.ts`
+Apollo Prophecy will generate the following `Errors.ts`
 
 ```ts
 export class AuthenticationRequiredError extends ProphecyError {
@@ -88,9 +99,9 @@ export class UserNotFoundError extends ProphecyError {
 }
 ```
 
-Now you can use it the following way `throw new UserNotFoundError()`
+Now you can use it the following way `throw new UserNotFoundError()` in your resolvers.
 
-`apollo-errorgen` also exposes a `definitions` and a graphql type named `ProphecyError` so that you can expose all your errors descriptions through resolvers, [go see Client](###client).
+`apollo-prophecy` also exposes a `definitions` object and a graphql type definition named `PropheticError` so that you can expose all your errors descriptions through resolvers, [go see Client](###client).
 
 ```ts
 ...
@@ -106,19 +117,81 @@ export const definitions = {
 };
 
 export const errorType = `
-  type ProphecyError {
-    message: String
+  type PropheticErrorExtensions {
     code: String
+  }
+
+  type PropheticError {
+    message: String
+    extensions: PropheticErrorExtensions
   }
 `;
 ...
 ```
 
 ### Client
-*TODO*
+#### `ask` command
+This command queries the `errors` field on a graphql endpoint and creates an `Errors.ts` file containing **helpers** for all the errors exposed through the server api documentation.
+
+```sh
+apollo-prophecy ask http://localhost:3000/graphql
+```
+
+#### Usage
+In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two methods `errorHere` and `isThis`, both takes one paramater of type `ApolloError` or `GraphQLError`.
+
+##### `errorHere()` function
+
+`errorHere` returns an object that has a **property** for each errors.
+You can perform a simple `boolean` check on the `error` argument by calling the approiate *key*.
+
+```ts
+import { errorHere } from `./_generated/Errors.ts`;
+
+...(error) => {
+  if(errorHere(error).isUserNotFoundError){
+    // Do something
+  } else if(errorHere(error).isNotAProphetError){
+    // Do something else
+  }
+}
+```
+
+##### `isThis()` function
+`isThis` returns an object that has a **handler** method for each errors.
+It perfoms a simple check on the `error` argument, if the it succeed the corresponding handler is called otherwise nothing happens.
+
+Note: Handlers can return a values.
+
+```ts
+import { isThis } from `./_generated/Errors.ts`;
+
+...(error) => {
+  isThis(error)
+  .UserNotFoundError(() => ...)
+  .NotAProphetError(() => ...)
+  .handle()
+}
+```
+
+React example:
+
+```tsx
+import { isThis } from `./_generated/Errors.ts`;
+
+...(error) => {
+  return <p style={{color: '#FF495C'}}>
+    {
+      isThis(error)
+      .UserNotFoundError(() => <span>Could not find a user with tha name</span>)
+      .NotAProphetError(() => <span>Only Prophets can perfom this kind of actions...</span>)
+      .handle();
+    }
+  <p style={{color: '#FF495C'}}>
+}
+```
 
 ## TODO
-* See [#1][i1]: Client `apollo-errorgen ask` command
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
 * See [#3][i3]: Use [Yargs](https://github.com/yargs/yargs) for arguments parsing
 
@@ -126,10 +199,12 @@ export const errorType = `
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
 [i3]: https://github.com/theGlenn/apollo-prophecy/issues/3
 
-## Contribute
-Take an issue fork `/develop` -> work -> test -> pull request -> 💥
+## Contributing
+[![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
-## Run tests
+✊ Grab an issue -> 🍴 fork **develop** -> 👨‍💻 Code  -> 🛠 Test -> 📩 Pull Request -> 💥💥💥
+
+Running tests locally:
 ```sh
 npm test
 ```

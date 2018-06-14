@@ -1,15 +1,11 @@
 #!/usr/bin/env node
-
 import * as minimist from 'minimist';
 import { ParsedArgs } from 'minimist';
+import { commands } from './';
 
-import { generate, askErrors } from './commands';
-
-// apollo-prophecy generate errors.json
-// apollo-prophecy ask-erros http://localhost:3000/graphql -q Errs.ts
 interface Args extends ParsedArgs {
   generate?: string
-  "ask-errors"?: string
+  "ask"?: string
 
   file?: string
   f?: string
@@ -19,6 +15,9 @@ interface Args extends ParsedArgs {
 
   query?: string
   q?: string
+
+  type?: string
+  headers?: string
 };
 
 type Method = 'generate' | 'ask-errors'
@@ -34,8 +33,11 @@ if(argv._.length > 0) {
     const { file, f, out, o } = argv;
     const jsonfile = file || f || argv._[1];
     const outFile = out || o;
-    generate({ intputFilePath: jsonfile, outputFilePath: outFile });
-  } else if(method === 'ask-errors') {
-    askErrors()
+    commands.generate({ intputFilePath: jsonfile, outputFilePath: outFile });
+  } else if(method === 'ask') {
+    const { type: errorType, file, f, out, o, headers } = argv;
+    const input = file || f || argv._[1];
+    const outputFilePath = out || o;
+    commands.ask({ input, errorType, outputFilePath });
   }
 }
