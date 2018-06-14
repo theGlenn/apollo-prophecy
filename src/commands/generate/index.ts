@@ -7,12 +7,13 @@ export interface ProphecyArgs {
   outputFilePath?: string,
 }
 
-export default function generate (args: ProphecyArgs) {
+export default async function generate (args: ProphecyArgs) {
   const { intputFilePath, outputFilePath } =  args;
-  readJsonDef(intputFilePath, (entries) => {
-    const rawClassContent = generateRawClass(entries);
-    const outputPath = writeClassFile(rawClassContent, outputFilePath);
-    console.log('🔮 You will fail... but successfully');
-    console.log(`└── ✨ Prophecy available at ${outputPath}`);
-  });
+  return new Promise<string>((resolve) => {
+    readJsonDef(intputFilePath, (entries) => {
+      const rawClassContent = generateRawClass(entries);
+      const outputPath = writeClassFile(rawClassContent, outputFilePath);
+      resolve(outputPath);
+    });
+  })
 }

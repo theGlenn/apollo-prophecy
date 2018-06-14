@@ -26,22 +26,22 @@ function exeuteServerQuery(serverUri: string, type: string, headers: Headers) {
   return makePromise(execute(link, operation));
 }
 
-export default async function(serverUri: string, type: string = 'errors', headers: Headers) {
+export default async function(serverUri: string, field: string = 'errors', headers: Headers) {
   let result;
   try {
-    result = await exeuteServerQuery(serverUri, type, headers);
+    result = await exeuteServerQuery(serverUri, field, headers);
   } catch(e) {
     throw e;
   }
 
   if (result.errors) {
-    throw new Error(`Errors occured querying "${type}": ${result.errors}`);
+    throw new Error(`Errors occured querying "${field}": ${result.errors}`);
   }
 
-  if (!result.data || !result.data[type]) {
-    throw new Error(`No Errors found to generate on ${type}`);
+  if (!result.data || !result.data[field]) {
+    throw new Error(`No Errors found to generate on query field ${field}`);
   }
 
-  const errors = result.data[type];
+  const errors = result.data[field];
   return toErrorEntries(errors as ErrorEntry[]);
 }
