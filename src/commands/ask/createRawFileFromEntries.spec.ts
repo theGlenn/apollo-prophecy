@@ -66,6 +66,7 @@ export class PropheticErrorHandled {
   UnknownError(handler: Handler) { return this.inCodes(PropheticErrorCode.UnknownError, handler); }
   ForbiddenError(handler: Handler) { return this.inCodes(PropheticErrorCode.ForbiddenError, handler); }
   AuthenticationRequiredError(handler: Handler) { return this.inCodes(PropheticErrorCode.AuthenticationRequiredError, handler); }
+  handle() { return this.handler(); }
 }
   
 const CODE_LESS_EXTENSION = { code: 'NONE'};

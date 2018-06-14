@@ -14,6 +14,5 @@ describe('createError', () => {
     }
     `;
     expect(removeWhiteSpaces(SpecialError)).to.be.eq(removeWhiteSpaces(expectedClass));
-    //expect(() => { throw new SpecialError()}).to.throw('SpecialError');
   });
 });

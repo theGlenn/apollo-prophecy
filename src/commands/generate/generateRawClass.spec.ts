@@ -42,7 +42,6 @@ describe('createError', () => {
     type PropheticError {
       message: String
       code: String?
-    }
-    `));
+    }`));
   });
 });

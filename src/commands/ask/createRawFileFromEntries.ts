@@ -42,6 +42,7 @@ export class PropheticErrorHandled {
 
   CodeLessError(handler: Handler) { return this.inCodes(PropheticErrorCode.CodeLessError, handler); }
   _FUNCTIONS_
+  handle() { return this.handler(); }
 }`
 const PropheticErrorHandlerDef = "$_ENUM_$(handler: Handler) { return this.inCodes(PropheticErrorCode.$_ENUM_$, handler); }";
 
