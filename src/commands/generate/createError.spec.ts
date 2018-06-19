@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
 import createError from './createError'
-import { removeWhiteSpaces } from './../../utils'
+import { removeWhiteSpaces } from '../../_specs-utils';
 
 describe('createError', () => {
   it('Should create Special error classs string', () => {

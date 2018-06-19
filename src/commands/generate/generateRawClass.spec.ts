@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect } from 'chai';
 import { toRawClassesArray,toScalarTypesMap, generatePropheticErrorType } from './generateRawClass'
-import { removeWhiteSpaces } from '../../utils';
+import { removeWhiteSpaces } from '../../_specs-utils';
 
 const errors = {
   UnknownError: {
