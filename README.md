@@ -46,7 +46,8 @@
     <img src="https://img.shields.io/github/issues/theGlenn/apollo-prophecy/good%20first%20issue.svg"
       alt="GitHub good first issue" />
   </a>
-
+</div>
+<div align="center">
   <a href="https://twitter.com/intent/follow?screen_name=glennsonna">
     <img src="https://img.shields.io/twitter/follow/glennsonna.svg?style=social&logo=twitter" alt="follow on Twitter"></a>
 </div>
