@@ -17,11 +17,9 @@ export const PropheticErrorTextDef = `class PropheticError extends ApolloError {
 }`
 
 export default function(name: string, message: string, code: string, properties?: Record<string, any>) {
-  return `
-  export class ${name} extends PropheticError {
-    constructor(properties?: Record<string, any>) {
-      super("${name}", "${message}", ${code}, properties);
-    }
+  return `export class ${name} extends PropheticError {
+  constructor(properties?: Record<string, any>) {
+    super("${name}", "${message}", "${code}", properties);
   }
-  `
+}`
 }

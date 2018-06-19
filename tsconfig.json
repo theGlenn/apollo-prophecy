@@ -16,7 +16,8 @@
     "./dist",
     "./_generated",
     "./node_modules",
-    "./lib/**/*.spec.ts",
-    "./lib/**/*.check.ts"
+    "./src/**/*.spec.ts",
+    "./src/**/*.check.ts",
+    "./src/_specs-utils"
     ]
 }
