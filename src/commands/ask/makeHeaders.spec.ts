@@ -13,4 +13,8 @@ describe('makeHeader', () => {
     const headers = makeHeaders();
     expect(headers).to.be.empty;
   });
+
+  it('Should throw -> Headers should be specified as "Name: Value"', () => {
+    expect(() => makeHeaders(['Authorization Bearer uoauzeaouhenaoea'])).to.throw('Headers should be specified as "Name: Value"');
+  });
 });

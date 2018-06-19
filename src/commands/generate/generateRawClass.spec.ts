@@ -19,18 +19,16 @@ const errors = {
 };
 
 const expectedTypes = [ { code: "String" }, { code: "String" }, { code: "String" }];
-
+const expectedOutputClass = `export class ForbiddenError extends PropheticError {
+  constructor(properties?: Record<string, any>) {
+    super("ForbiddenError", "You are not allowed to do this", "FORBIDDEN", properties);
+  }
+}`
 describe('generateRawClass', () => {
   it('toRawClassesArray should correctly returns string classes definition', () => {
     const rawClasses = toRawClassesArray(errors);
     expect(rawClasses.length).to.be.eq(3);
-    expect(removeWhiteSpaces(rawClasses[1])).to.be.eql(removeWhiteSpaces(`
-    export class ForbiddenError extends PropheticError {
-      constructor(properties?: Record<string, any>) {
-        super("ForbiddenError", "You are not allowed to do this", "FORBIDDEN" }, properties);
-      }
-    }
-    `));
+    expect(rawClasses[1]).to.be.eq(expectedOutputClass);
   });
 
   it('Should correctly create the GraphQL Type Definition string', () => {
