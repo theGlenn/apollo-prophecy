@@ -40,6 +40,16 @@
     <img src="https://img.shields.io/badge/contributions-friendly-b44ac1.svg"
       alt="Contribute" />
   </a>
+
+  <!-- GitHub good first issue -->
+  <a href="https://github.com/theGlenn/apollo-prophecy/labels/good%20first%20issue">
+    <img src="https://img.shields.io/github/issues/theGlenn/apollo-prophecy/good%20first%20issue.svg"
+      alt="GitHub good first issue" />
+  </a>
+</div>
+<div align="center">
+  <a href="https://twitter.com/intent/follow?screen_name=glennsonna">
+    <img src="https://img.shields.io/twitter/follow/glennsonna.svg?style=social&logo=twitter" alt="follow on Twitter"></a>
 </div>
 
 ## 📟 Features
