@@ -30,4 +30,12 @@ describe('createClassFile', () => {
 
     fs.rmrf(tmpDirPath);
   });
+
+  it('Should throw .ts file expected as output', () => {
+    const tmpDirPath = tmpErrorFilePath('Errors.js');
+    const writeClassFileThrow = () => writeClassFile("class SpecialError {}", tmpDirPath);
+    expect(writeClassFileThrow).to.throw(".ts file expected as output");
+
+    fs.rmrf(tmpDirPath);
+  });
 });

@@ -28,7 +28,6 @@ export function toRawClassesArray(entries: JsonInputErrorEntryRecord) {
   });
 }
 
-export const exludeMessageAndName = (entry: JsonInputErrorEntry) => Object.keys(entry).filter(key => key !== 'message' || 'name')
 export function toScalarTypesMap(entries: JsonInputErrorEntryRecord): ScalarTypesMap[] {
   return Object.values(entries).map((entry) => Object.keys(entry).filter(key => key !== 'message').reduce((prev, entryFieldKey) => {
     const fieldValue = entry[entryFieldKey];

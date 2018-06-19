@@ -6,8 +6,9 @@
   "bin": "./lib/cli.js",
   "scripts": {
     "test": "rm -rf coverage && nyc mocha --opts mocha.opts",
+    "report": "nyc report && open ./coverage/index.html",
     "coverage": "nyc report --reporter=text-lcov | coveralls && open ./coverage/index.html",
-    "testreport": "npm run test && npm run coverage",
+    "testreport": "npm run test && npm run report",
     "build": "rm -rf lib && tsc",
     "cli": "ts-node src/cli.ts",
     "preversion": "npm test",
