@@ -16,6 +16,7 @@
     <img src="https://img.shields.io/npm/v/apollo-prophecy.svg"
       alt="NPM version" />
   </a>
+  
   <!-- Build Status -->
   <a href="https://travis-ci.com/theGlenn/apollo-prophecy">
     <img src="https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master"
