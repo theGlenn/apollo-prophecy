@@ -13,12 +13,12 @@
 <div align="center">
   <!-- NPM version -->
   <a href="https://npmjs.org/package/apollo-prophecy">
-    <img src="https://img.shields.io/npm/v/apollo-prophecy.svg?style=flat-square"
+    <img src="https://img.shields.io/npm/v/apollo-prophecy.svg"
       alt="NPM version" />
   </a>
   <!-- Build Status -->
   <a href="https://travis-ci.com/theGlenn/apollo-prophecy">
-    <img src="https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square"
+    <img src="https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master"
       alt="Build Status" />
   </a>
 
@@ -26,6 +26,18 @@
   <a href="https://coveralls.io/github/theGlenn/apollo-prophecy?branch=master">
     <img src="https://coveralls.io/repos/github/theGlenn/apollo-prophecy/badge.svg?branch=master"
       alt="Coverage Status" />
+  </a>
+
+  <!-- License -->
+  <a href="https://github.com/theGlenn/apollo-prophecy/blob/develop/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg"
+      alt="License" />
+  </a>
+
+  <!-- Contribute -->
+  <a href="https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github">
+    <img src="https://img.shields.io/badge/contributions-friendly-b44ac1.svg"
+      alt="Contribute" />
   </a>
 </div>
 
@@ -60,7 +72,7 @@ Usage: apollo-prophecy [command]
 
 Commands:
   apollo-prophecy generate <json file> [--out]
-  apollo-prophecy ask <graphql endpoint> [--field] [--out]
+  apollo-prophecy ask <graphql endpoint> [--type] [--out]
 
 Options:
   -h, --help     Show help                                             [boolean]
@@ -71,12 +83,13 @@ Options:
 
 #### `generate` command
 
-This command creates the `Error.ts` file from a `JSON` input file, using `--out` param you can change the name and location.
-Input file should at least contains the keys `message` and `code`
+Creates `Error.ts` from a `JSON` input file. Using `--out` param you can change the name and location.
 
 ```sh
 apollo-prophecy generate errors.json
 ```
+
+Input file entries should at least contains the keys `message` and `code`.
 
 For example given the following `errors.json` as input:
 
@@ -96,6 +109,7 @@ For example given the following `errors.json` as input:
 Apollo Prophecy will generate the following `Errors.ts`
 
 ```ts
+...
 export class AuthenticationRequiredError extends ProphecyError {
   constructor(properties?: Record<string, any>) {
     super("AuthenticationRequiredError", "You must be logged in to do this","AUTH_REQUIRED", properties);
@@ -107,11 +121,12 @@ export class UserNotFoundError extends ProphecyError {
     super("UserNotFoundError", "No user found", "USER_NOT_FOUND", properties);
   }
 }
+...
 ```
 
 Now you can use it the following way `throw new UserNotFoundError()` in your resolvers.
 
-`apollo-prophecy` also exposes a `definitions` object and a graphql type definition named `PropheticError` so that you can expose all your errors descriptions through resolvers, [go see Client](###client).
+`apollo-prophecy` also exposes a `definitions` object and a graphql type definition named `PropheticError` so that you can expose all your errors descriptions through a resolver, [see Client](###client).
 
 ```ts
 ...
@@ -147,19 +162,19 @@ export const errorType = `
 
 #### `ask` command
 
-This command queries the `errors` field on a graphql endpoint and creates an `Errors.ts` file containing **helpers** for all the errors exposed through the server api documentation.
+Queries the `errors` field on the specified graphql endpoint and creates an `Errors.ts` file containing helpers with **check methods** ([see Helpers](#helpers)) for all the errors exposed through the server api documentation.
 
 ```sh
 apollo-prophecy ask http://localhost:3000/graphql
 ```
 
-#### Usage
+#### Helpers
 
-In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two methods `errorHere` and `isThis`, both takes one paramater of type `ApolloError` or `GraphQLError`.
+In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two helpers methods `errorHere` and `isThis`, both methods takes one paramater of type `ApolloError` or `GraphQLError`.
 
 ##### `errorHere()` function
 
-`errorHere` returns an object that has a **property** for each errors.
+`errorHere` returns an object that has a **property** named after each errors.
 You can perform a simple `boolean` check on the `error` argument by calling the approiate *key*.
 
 ```ts
@@ -205,7 +220,7 @@ import { isThis } from `./_generated/Errors.ts`;
       .NotAProphetError(() => <span>Only Prophets can perfom this kind of actions...</span>)
       .handle();
     }
-  <p style={{color: '#FF495C'}}>
+  </p>
 }
 ```
 
@@ -214,16 +229,19 @@ import { isThis } from `./_generated/Errors.ts`;
 [![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
 <div align="center">
-✊ Grab an issue -> 🍴 fork **develop** -> 👨‍💻 Code  -> 🛠 Test -> 📩 Pull Request -> 💥💥💥
+<span>✊ Grab an issue ⤵</span><br/>
+🍴 fork <strong>develop</strong> ⤵<br/>
+👨‍💻 Code ⤵<br/>
+🛠 Test ⤵<br/>
+📩 Pull Request ⤵<br/>
+💥💥💥<br/>
 </div>
 
 ### TODO
 
 * See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
 
-[i1]: https://github.com/theGlenn/apollo-prophecy/issues/1
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
-[i3]: https://github.com/theGlenn/apollo-prophecy/issues/3
 
 ### Running tests locally:
 
