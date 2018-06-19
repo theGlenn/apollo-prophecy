@@ -1,2 +1,2 @@
-export { default as generate } from './generate'
-export { default as ask } from './ask'
+export { generate } from './generate'
+export { ask } from './ask'
