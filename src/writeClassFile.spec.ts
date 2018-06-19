@@ -1,5 +1,3 @@
-import * as os from 'os';
-import * as osFs from 'fs';
 import * as path from 'path';
 import * as chai from 'chai';
 import * as chaiFS from 'chai-fs';
@@ -7,14 +5,10 @@ import * as chaiFS from 'chai-fs';
 import writeClassFile from './writeClassFile'
 import { fs } from './utils';
 
+import { mkdirTmp, tmpErrorFilePath } from './_specs-utils';
+
 chai.use(chaiFS);
 const { expect } = chai;
-
-const mkdirTmp = () => {
-  const tmpDir = os.tmpdir();
-  const dirLocation = path.join(os.tmpdir(), 'apollo-prophetic-test-');
-  return osFs.mkdtempSync(dirLocation);
-};
 
 describe('createClassFile', () => {
   it('Should create a folder with the "Errors.ts" file in it', () => {
@@ -29,7 +23,7 @@ describe('createClassFile', () => {
   });
 
   it('Should create a folder with the "Errs.ts file" in it', () => {
-    const tmpDirPath = path.join(mkdirTmp(), 'Errs.ts');
+    const tmpDirPath = tmpErrorFilePath('Errs.ts');
     writeClassFile("class SpecialError {}", tmpDirPath);
     ((expect(tmpDirPath).to.be.a) as any).to.be.a.file().and.not.empty;
     ((expect(tmpDirPath).to.be.a) as any).to.be.a.file().with.content("class SpecialError {}");

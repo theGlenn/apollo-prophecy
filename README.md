@@ -21,6 +21,12 @@
     <img src="https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square"
       alt="Build Status" />
   </a>
+
+  <!-- Coverage Status -->
+  <a href="https://coveralls.io/github/theGlenn/apollo-prophecy?branch=master">
+    <img src="https://coveralls.io/repos/github/theGlenn/apollo-prophecy/badge.svg?branch=master"
+      alt="Coverage Status" />
+  </a>
 </div>
 
 ## 📟 Features

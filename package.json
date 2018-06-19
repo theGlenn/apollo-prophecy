@@ -5,8 +5,9 @@
   "main": "./lib/index.js",
   "bin": "./lib/cli.js",
   "scripts": {
-    "test": "nyc mocha --opts mocha.opts",
-    "coverage": "nyc report --reporter=html && open ./coverage/index.html",
+    "test": "rm -rf coverage && nyc mocha --opts mocha.opts",
+    "coverage": "nyc report --reporter=text-lcov | coveralls && open ./coverage/index.html",
+    "testreport": "npm run test && npm run coverage",
     "build": "rm -rf lib && tsc",
     "cli": "ts-node src/cli.ts",
     "preversion": "npm test",
@@ -71,7 +72,8 @@
     ],
     "exclude": [
       "lib",
-      "**/*.d.ts"
+      "**/*.d.ts",
+      "coverage"
     ],
     "reporter": [
       "html"
