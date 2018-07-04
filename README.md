@@ -62,18 +62,24 @@
 
   * [Installation](#installation)
   * [Usage](#usage)
-     * [Server Side](#server)
-     * [Client Side](#client)
-  * [Todo](#todo)
-  * [Contribute](#contribute)
-  * [Test and Miscellaneous](#run-tests)
+    * [Server Side](#server)
+    * [Client Side](#client)
+  * [Contributing](#contributing)
+    * [TODO](#todo)
+    * [Test and Miscellaneous](#run-tests)
 
 ## Installation
 
-First, install `apollo-prophecy` globaly
+Install with npm:
 
 ```sh
 npm install -g apollo-prophecy
+```
+
+Install with yarn:
+
+```sh
+yarn global add apollo-prophecy
 ```
 
 ## Usage
@@ -91,6 +97,7 @@ Options:
 ```
 
 ### Server
+> ⚠️ This Project is *Only* compatible with Apollo-Server v2
 
 #### `generate` command
 
@@ -235,8 +242,7 @@ import { isThis } from `./_generated/Errors.ts`;
 }
 ```
 
-## Contributing
-
+## Contributing 
 [![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
 <div align="center">
@@ -250,11 +256,24 @@ import { isThis } from `./_generated/Errors.ts`;
 
 ### TODO
 
-* See [#2][i2]: Add support for third party libraries errors like [apollo-errors](https://github.com/thebigredgeek/apollo-errors)
+* See [#2][i2]: Add support for third-party errors libraries like [apollo-errors](https://github.com/thebigredgeek/apollo-errors) <a class="d-inline-block IssueLabel v-align-text-top labelstyle-7057ff linked-labelstyle-7057ff tooltipped tooltipped-s" style="background-color: #7057ff; color: #ffffff">good first issue</a>
+* See [#12][i12]: Add `errors.json` file as ask command argument <a class="d-inline-block IssueLabel v-align-text-top labelstyle-7057ff linked-labelstyle-7057ff tooltipped tooltipped-s" style="background-color: #7057ff; color: #ffffff">good first issue</a>
+* See [#16][i16]: Add language specific code generation [Java/Kotlin][i13]/[Swift][i14]/[Javascript][i15]
+  * See [#13][i13]: Java/Kotlin  <a class="d-inline-block IssueLabel v-align-text-top labelstyle-7057ff linked-labelstyle-7057ff tooltipped tooltipped-s" style="background-color: #7057ff; color: #ffffff">good first issue</a>
+  * See [#14][i14]: Swift <a class="d-inline-block IssueLabel v-align-text-top labelstyle-7057ff linked-labelstyle-7057ff tooltipped tooltipped-s" style="background-color: #7057ff; color: #ffffff">good first issue</a>
+  * See [#15][i15]: Javascript <a class="d-inline-block IssueLabel v-align-text-top labelstyle-7057ff linked-labelstyle-7057ff tooltipped tooltipped-s" style="background-color: #7057ff; color: #ffffff">good first issue</a>
+
 
 [i2]: https://github.com/theGlenn/apollo-prophecy/issues/2
+[i12]: https://github.com/theGlenn/apollo-prophecy/issues/12
 
-### Running tests locally:
+[i13]: https://github.com/theGlenn/apollo-prophecy/issues/13
+[i14]: https://github.com/theGlenn/apollo-prophecy/issues/14
+[i15]: https://github.com/theGlenn/apollo-prophecy/issues/15
+
+[i16]: https://github.com/theGlenn/apollo-prophecy/issues/16
+
+### Run tests
 
 ```sh
 npm test
