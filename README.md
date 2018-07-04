@@ -245,13 +245,15 @@ import { isThis } from `./_generated/Errors.ts`;
 ## Contributing 
 [![Build status](https://travis-ci.com/theGlenn/apollo-prophecy.svg?branch=master&style=flat-square)](https://travis-ci.com/theGlenn/apollo-prophecy)
 
-<div align="center">
-<span>✊ Grab an issue ⤵</span><br/>
-🍴 fork <strong>develop</strong> ⤵<br/>
-👨‍💻 Code ⤵<br/>
-🛠 Test ⤵<br/>
-📩 Pull Request ⤵<br/>
-💥💥💥<br/>
+<div>
+  <table >
+    <tr><td>✊</td><td align="center">Grab an issue</td> <td>⏬</td></tr>
+    <tr><td>🍴</td><td align="center">fork <strong>develop</strong></td> <td>⏬</td></tr>
+    <tr><td>👨‍💻</td><td align="center">Code</td> <td>⏬</td></tr>
+    <tr><td>🛠</td><td align="center">Test</td> <td>⏬</td></tr>
+    <tr><td>📩</td><td align="center">Pull Request</td> <td>⏬</td></tr>
+  </table>
+  <p>💥💥💥</p>
 </div>
 
 ### TODO
