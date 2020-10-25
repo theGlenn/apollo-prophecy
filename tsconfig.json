@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "moduleResolution": "node",
+    "target": "es6",
     "module": "commonjs",
+    "types": ["node", "jest"],
+    "moduleResolution": "node",
+    "lib": [ "es6", "esnext" ],
+    "esModuleInterop": true,
+    "noImplicitAny": true,
     "declaration": true,
     "sourceMap": true,
+    "skipLibCheck": true,
+    "strict": true,
     "rootDir": "src",
-    "outDir": "lib",
-    "lib": [
-      "esnext", "dom", "es6"
-    ]
+    "outDir": "lib"
   },
   "exclude": [
-    "./test",
-    "./dist",
-    "./_generated",
-    "./node_modules",
+    "test",
+    "dist",
+    "_generated",
+    "node_modules",
     "./src/**/*.spec.ts",
     "./src/**/*.check.ts",
     "./src/_specs-utils"
