@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as chai from 'chai';
-import * as chaiFS from 'chai-fs';
+import chaiFS from 'chai-fs';
 
 import writeClassFile from './writeClassFile'
 import { fs } from './utils';

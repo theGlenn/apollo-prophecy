@@ -8,7 +8,7 @@ export const mkdirTmp = () => {
   return osFs.mkdtempSync(dirLocation);
 };
 
-export const tmpErrorFilePath = (fileName) => path.join(mkdirTmp(), fileName);
+export const tmpErrorFilePath = (fileName: string) => path.join(mkdirTmp(), fileName);
 export const removeWhiteSpaces = (text: string) => text.replace(/[^a-zA-Z]/g, "");
 
 export const entries = {

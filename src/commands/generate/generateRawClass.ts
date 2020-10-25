@@ -4,7 +4,7 @@ import { JsonInputErrorEntryRecord, JsonInputErrorEntry, toOutputErrors } from '
 export type ScalarType = "Boolean" | "Int" | "Float" | "String"
 export type ScalarTypesMap = {[key: string]: ScalarType};
 
-function scalarGQLTpeFromValue(value: any): ScalarType {
+function scalarGQLTpeFromValue(value: any): ScalarType | null {
   switch (typeof value) {
     case "string":
       return "String"
@@ -17,7 +17,7 @@ function scalarGQLTpeFromValue(value: any): ScalarType {
         return "Float"
       }
     default:
-      return null;
+      throw new Error(`Non scalar type define for "${value}" type is ${typeof value}`);
   }
 }
 
@@ -29,12 +29,14 @@ export function toRawClassesArray(entries: JsonInputErrorEntryRecord) {
 }
 
 export function toScalarTypesMap(entries: JsonInputErrorEntryRecord): ScalarTypesMap[] {
+  const initial: ScalarTypesMap = {};
   return Object.values(entries).map((entry) => Object.keys(entry).filter(key => key !== 'message').reduce((prev, entryFieldKey) => {
     const fieldValue = entry[entryFieldKey];
     const fieldType = scalarGQLTpeFromValue(fieldValue);
-    prev[entryFieldKey] = fieldType;
+    if (fieldType) prev[entryFieldKey] = fieldType;
+    
     return prev;
-  }, {}),{});
+  }, initial),{});
 }
 
 type TypeDefinition = { type: string, isNullableType: boolean }
@@ -79,7 +81,7 @@ export function generatePropheticErrorType(typesArray: ScalarTypesMap[]) {
   `
 }
 
-export default function (entries: JsonInputErrorEntryRecord) {
+export default function generateRawClass (entries: JsonInputErrorEntryRecord) {
   const rawErrorClasses = toRawClassesArray(entries).join('\n');
   const fieldsTypesMapArray = toScalarTypesMap(entries);
   const rawPropheticErrorAndExtensionsType = generatePropheticErrorType(fieldsTypesMapArray);
