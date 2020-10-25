@@ -5,10 +5,9 @@
   "main": "./lib/index.js",
   "bin": "./lib/cli.js",
   "scripts": {
-    "test": "rm -rf coverage && nyc mocha --opts mocha.opts",
-    "report": "nyc report && open ./coverage/index.html",
-    "coverage": "nyc report --reporter=text-lcov | coveralls && open ./coverage/index.html",
-    "testreport": "npm run test && npm run report",
+    "test": "jest --collectCoverage",
+    "test:watch": "jest --watch --runInBand --detectOpenHandles --coverage --env=node",
+    "coverage": "jest --collectCoverage && cat ./coverage/lcov.info | coveralls",
     "build": "rm -rf lib && tsc",
     "cli": "ts-node src/cli.ts",
     "preversion": "npm test",
@@ -63,16 +62,16 @@
     "@typescript-eslint/parser": "^4.5.0",
     "chai": "^4.1.2",
     "chai-fs": "^2.0.0",
-    "coveralls": "^3.0.1",
+    "coveralls": "^3.1.0",
     "eslint": "^7.12.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "jest": "^26.6.1",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "source-map-support": "^0.5.6",
-    "ts-jest": "^26.4.2",
+    "ts-jest": "^26.4.1",
     "ts-node": "6.1.0",
-    "typescript": "^2.9.1"
+    "typescript": "^3.7.5"
   },
   "resolutions": {
     "**@types/mocha": "^5.2.0",

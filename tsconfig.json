@@ -16,7 +16,6 @@
   },
   "exclude": [
     "test",
-    "dist",
     "_generated",
     "node_modules",
     "./src/**/*.spec.ts",

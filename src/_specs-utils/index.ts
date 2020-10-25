@@ -4,7 +4,7 @@ import * as path from 'path';
 
 export const mkdirTmp = () => {
   const tmpDir = os.tmpdir();
-  const dirLocation = path.join(os.tmpdir(), 'apollo-prophetic-test-');
+  const dirLocation = path.join(tmpDir, 'apollo-prophetic-test-');
   return osFs.mkdtempSync(dirLocation);
 };
 

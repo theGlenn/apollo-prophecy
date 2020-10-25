@@ -1,4 +1,12 @@
+const jestOverwrites = {
+  roots: ['src'],
+  testMatch: ['**/*.spec.ts'],
+  watchPathIgnorePatterns: ['<rootDir>/node_modules'],
+};
+
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  ...jestOverwrites,
+  clearMocks: true,
+  collectCoverage: true,
+  preset: 'ts-jest'
 };
