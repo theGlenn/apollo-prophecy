@@ -1,5 +1,3 @@
-import * as mocha from 'mocha';
-import { expect } from 'chai';
 import createError from './createError'
 import { removeWhiteSpaces } from '../../_specs-utils';
 
@@ -13,6 +11,6 @@ describe('createError', () => {
       }
     }
     `;
-    expect(removeWhiteSpaces(SpecialError)).to.be.eq(removeWhiteSpaces(expectedClass));
+    expect(removeWhiteSpaces(SpecialError)).toEqual(removeWhiteSpaces(expectedClass));
   });
 });

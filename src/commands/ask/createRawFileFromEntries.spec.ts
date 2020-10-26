@@ -1,6 +1,4 @@
-import { expect } from 'chai';
 import createRawFileFromEntries from './createRawFileFromEntries'
-import { writeFile } from '../../utils/fs-prophecy';
 
 const errors = [{
     "name": "UnknownError",
@@ -99,6 +97,6 @@ export const isThis = (error: ApolloError | GraphQLError | undefined) => {
 describe('createRawFile', () => {
   it('Should correctly generate raw file', () => {
     const errorsRawFile = createRawFileFromEntries(errors);
-    expect(errorsRawFile).to.be.eq(expectedFile);
+    expect(errorsRawFile).toEqual(expectedFile);
   });
 });
