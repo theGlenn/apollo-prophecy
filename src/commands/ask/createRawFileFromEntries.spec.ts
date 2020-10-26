@@ -78,7 +78,7 @@ const findCodes = (error: ApolloError | GraphQLError): PropheticErrorCode[] => {
   return [PropheticErrorCode.CodeLessError];
 }
 
-export const errorHere = (error: ApolloError | GraphQLError | undefined ) => {
+export const thisError = (error: ApolloError | GraphQLError | undefined ) => {
   if(!error) {
     return new PropheticError([]);
   }

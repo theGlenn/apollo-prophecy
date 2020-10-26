@@ -56,7 +56,7 @@
 
 * Generate **Server-side** **throwable** errors in your resolvers like `throw new NotAProphetError()`
 * Expose **machine readable** graphql errors through your api documentation
-* Generate **Client-side** Apollo errors **consumable** like `errorHere(error).isNotAProphetError ?`
+* Generate **Client-side** Apollo errors **consumable** like `thisError(error).isNotAProphetError ?`
 
 # 📋 Table of Contents
 
@@ -188,20 +188,20 @@ apollo-prophecy ask http://localhost:3000/graphql
 
 #### Helpers
 
-In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two helpers methods `errorHere` and `isThis`, both methods takes one paramater of type `ApolloError` or `GraphQLError`.
+In order to easily handle erros with **Apollo-Client**, the generated `Errors.ts` exposes two helpers methods `thisError` and `isThis`, both methods takes one paramater of type `ApolloError` or `GraphQLError`.
 
-##### `errorHere()` function
+##### `thisError()` function
 
-`errorHere` returns an object that has a **property** named after each errors.
+`thisError` returns an object that has a **property** named after each errors.
 You can perform a simple `boolean` check on the `error` argument by calling the approiate *key*.
 
 ```ts
-import { errorHere } from `./_generated/Errors.ts`;
+import { thisError } from `./_generated/Errors.ts`;
 
 ...(error) => {
-  if(errorHere(error).isUserNotFoundError){
+  if(thisError(error).isUserNotFoundError){
     // Do something
-  } else if(errorHere(error).isNotAProphetError){
+  } else if(thisError(error).isNotAProphetError){
     // Do something else
   }
 }
