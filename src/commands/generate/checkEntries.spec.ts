@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import checkEntries from "./checkEntries";
 import { entries } from '../../_specs-utils';
 
@@ -14,11 +13,11 @@ const mockReadFromFile = () => JSON.parse(`{
 
 describe('checkEntries', () => {
   it('Should positevely check the entries and return them', () => {
-    expect(checkEntries(entries)).to.be.eq(entries);
+    expect(checkEntries(entries)).toEqual(entries);
   });
 
   it('Should throw No "code" key found', () => {
     const checkEntriesMock = () => checkEntries(mockReadFromFile())
-    expect(checkEntriesMock).to.throw('[CodeKeyImperative] No "code" key found for: [NoCodeError]');
+    expect(checkEntriesMock).toThrow('[CodeKeyImperative] No "code" key found for: [NoCodeError]');
   });
 });

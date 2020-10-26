@@ -21,3 +21,5 @@ export const entries = {
     "code": "FORBIDDEN",
   },
 };
+
+export * as jestFS from './jest-fs';

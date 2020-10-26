@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { toRawClassesArray,toScalarTypesMap, generatePropheticErrorType } from './generateRawClass'
 import { removeWhiteSpaces } from '../../_specs-utils';
 
@@ -26,15 +25,15 @@ const expectedOutputClass = `export class ForbiddenError extends PropheticError 
 describe('generateRawClass', () => {
   it('toRawClassesArray should correctly returns string classes definition', () => {
     const rawClasses = toRawClassesArray(errors);
-    expect(rawClasses.length).to.be.eq(3);
-    expect(rawClasses[1]).to.be.eq(expectedOutputClass);
+    expect(rawClasses).toHaveLength(3);
+    expect(rawClasses[1]).toEqual(expectedOutputClass);
   });
 
   it('Should correctly create the GraphQL Type Definition string', () => {
     const scalarTypesArray = toScalarTypesMap(errors);
     const rawGraphqlTypes = generatePropheticErrorType(scalarTypesArray);
     
-    expect(removeWhiteSpaces(rawGraphqlTypes)).to.be.eq(removeWhiteSpaces(`
+    expect(removeWhiteSpaces(rawGraphqlTypes)).toEqual(removeWhiteSpaces(`
     type PropheticErrorExtensions {
       code: String?
     }
@@ -48,6 +47,6 @@ describe('generateRawClass', () => {
 
   it('Should correctly map object fields to the right type', () => {
     const scalarTypesArray = toScalarTypesMap(errors);
-    expect(scalarTypesArray).to.be.eql(expectedTypes);
+    expect(scalarTypesArray).toEqual(expectedTypes);
   });
 });

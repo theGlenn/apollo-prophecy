@@ -9,17 +9,21 @@
     "noImplicitAny": true,
     "declaration": true,
     "sourceMap": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "pretty": true,
     "rootDir": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "strict": true
   },
   "exclude": [
+    "lib",
     "test",
-    "_generated",
+    "**/*.spec.ts",
+    "**/*.check.ts",
+    "./node_modules",
     "node_modules",
-    "./src/**/*.spec.ts",
-    "./src/**/*.check.ts",
-    "./src/_specs-utils"
-    ]
+    "_generated",
+    "_specs-utils"
+  ]
 }
